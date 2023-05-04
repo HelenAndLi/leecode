@@ -31,14 +31,25 @@ public class Demo22 {
          * (())
          * ()()
          * 递归
+         *
+         *
+         * ，
+         * 
+         * ()
+         * ()(),             (())
+         * ()()(),  ()(()),  (())(),           ((())),
+         *
+         * 0个：(((())))
+         * 1个：()()()(),()(())(),()((())),
+         * 2个：(())(()),(())()(),((()))(),
+         * 当n，有1个()，后面的可能性
          */
     }
 
     public static List<String> generateParenthesis(int n){
         List<String> result = new ArrayList<>();
         if(n == 1){
-            result.add("(");
-            result.add(")");
+            result.add("()");
             return result;
         }
 
