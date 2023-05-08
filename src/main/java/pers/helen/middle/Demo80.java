@@ -1,5 +1,6 @@
 package pers.helen.middle;
 
+import java.time.Year;
 import java.util.Arrays;
 
 /**
@@ -34,16 +35,23 @@ import java.util.Arrays;
 public class Demo80 {
 
     public static void main(String[] args){
-        //        int[] nums = new int[]{0, 1, 1, 1, 2, 2, 3, 4, 4};
-        //                                        int[] nums = new int[]{1, 1, 1, 2, 2, 3};
-        int[] nums = new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3};
-        System.out.println(removeDuplicates(nums));
+        //                int[] nums = new int[]{1, 1, 1, 2, 2, 2, 3, 3};
+        //                                int[] nums = new int[]{1, 1, 1};
+        //        int[] nums = new int[]{1, 2, 2, 2};
+        //                int[] nums = new int[]{0, 1, 1, 1, 2, 2, 3, 4, 4};
+        //                                                        int[] nums = new int[]{1, 1, 1, 2, 2, 3};
+        int[] nums = new int[]{1, 1, 1, 2, 2, 2, 3, 3};
+        //        int[] nums = new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3};
+        int len = removeDuplicates(nums);
+        for(int i = 0; i < len; i++){
+            System.out.print(nums[i] + ", ");
+        }
+        System.out.println();
     }
 
     /**
-     * 1、当前数值出现几次 （count-replace），有可能代替了前面的数值
-     * - 不超过2次，直接保留（count-replace）个，其余的用下一个数值替代（replace），从当前位置开始遍历下一个数值
-     * - 超过2次，只保留2个，用下一个数值代替，并记录代替了几个（replace）
+     * 遍历当前元素（同一数值的第一个），如果replace！=0，即表示它代替上个元素的个数，此时用下个元素顶上（同时newReplace+），保证当前元素没有其他元素的影响，count+当前元素个数
+     * 如果下个元素没了，说明当前元素是最后一个元素，那么count加上（当前元素个数-replace）即可
      *
      * @param nums
      *
@@ -56,52 +64,53 @@ public class Demo80 {
 
         int replace = 0;
         int all = 0;
-
+        int j;
+        // 1, 1, 1, 2, 2, 2, 3, 3
         for(int i = 0; i < length; ){
-            System.out.println("nums[]=" + Arrays.toString(nums));
-            System.out.println("all=" + all);
-            System.out.println("i=" + i);
-            int j = i + 1;
+            int nextReplace = 0;
+
+            // 下一个数值的位置
+            j = i + 1;
             // 记录个数
             int count = 1;
             while(j < length && nums[i] == nums[j]){
                 ++j;
                 count++;
             }
-
+            // 达到最后一个数值了
             if(j >= length){
-                all += (count - replace);
+
+                if(j - i - replace > 2){
+                    all = all + 2;
+                }else{
+                    all = all + (j - i - replace);
+                }
                 break;
             }
-            System.out.println("j=" + j);
-            System.out.println("num=" + nums[i] + ", count=" + count + ", replace=" + replace);
-            if(replace > 0){
-                all += (count - replace);
-                for(int a = i + (count - replace); a < j; a++){
-                    nums[a] = nums[j];
+            int nextVal = nums[j];
+            if(replace != 0){
+                // 用下一数值替代当前数值，当前数值替代了几个，下一数值就要替代几个
+                for(int a = 1; a <= replace; a++){
+                    nums[j - a] = nextVal;
                 }
-                replace = j - (i + (count - replace));
-                i = i + (count - replace);
 
-            }else{
-
-                all += count;
-                if(j - i > 2){
-
-                    // 超过两个
-                    for(int a = i + 2; a < j; a++){
-                        nums[a] = nums[j];
-                    }
-                    replace = j - i - 2;
-                    i += 3;
-
-                }else{
-                    i += count;
-
-                }
+                nextReplace = replace;
+                count = count - replace;
             }
+
+            if(count > 2){
+                for(int a = 0; a < count - 2; a++){
+                    nums[a + i + 2] = nextVal;
+                    nextReplace++;
+                }
+                all += 2;
+                i += 2;
+            }else{
+                i += count;
+                all += count;
+            }
+            replace = nextReplace;
         }
-        System.out.println(Arrays.toString(nums));
         return all;
     }
 }
