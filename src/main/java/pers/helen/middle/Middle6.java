@@ -53,31 +53,34 @@ public class Middle6 {
         char[] arr1 = s.toCharArray();
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i <= numRows; i++){
-            System.out.println("row="+i);
-            int locate = i;
-            sb.append(arr1[i-1]);
-            while(locate <= s.length()){
-                int locate1 = locate+ 2 * (numRows - (i - 1) - 1);
-                if(locate1==locate){
-                    break;
-                }
 
-                System.out.println("locate1="+locate1);
+            System.out.println("==========row==========" + i);
+            int locate = i;
+            sb.append(arr1[i - 1]);
+            System.out.println("sb0=" + sb);
+            while(locate <= s.length()){
+                int locate1 = locate + 2 * (numRows - (i - 1) - 1);
                 if(locate1 > s.length()){
                     break;
                 }
-                sb.append(arr1[locate1-1]);
-                locate =locate1;// 位置1
+                if(locate!=locate1){
+                    System.out.println("locate1=" + locate1);
+                    sb.append(arr1[locate1 - 1]);
+                    System.out.println("sb1=" + sb);
+                    locate = locate1;// 位置1
+                }
+
 
                 locate += 2 * (i - 1);// 位置2
-                System.out.println("locate2="+locate);
                 if(locate > s.length()){
                     break;
                 }
-                if(locate1==locate){
+                if(locate1 == locate){
                     continue;
                 }
-                sb.append(arr1[locate-1]);
+                System.out.println("locate2=" + locate);
+                sb.append(arr1[locate - 1]);
+                System.out.println("sb2=" + sb);
             }
         }
         return sb.toString();
