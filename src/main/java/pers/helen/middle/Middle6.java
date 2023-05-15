@@ -43,44 +43,44 @@ package pers.helen.middle;
 public class Middle6 {
 
     public static void main(String[] args){
-        String s = "PAYPALISHIRING";
-        int numRows = 3;
+        //        String s = "AB";
+        //        int numRows = 1;
+        //        String s = "PAYPALISHIRING";
+        //        int numRows = 3;
+        String s = "A";
+        int numRows = 2;
         System.out.println(convert(s, numRows));
     }
 
     // PAHNAPLSIIGYIR
     public static String convert(String s, int numRows){
         char[] arr1 = s.toCharArray();
+        int length = s.length();
         StringBuilder sb = new StringBuilder();
-        for(int i = 1; i <= numRows; i++){
+        if(numRows == 1 || length < numRows){
+            return s;
+        }
 
-            System.out.println("==========row==========" + i);
+        for(int i = 0; i < numRows; i++){
             int locate = i;
-            sb.append(arr1[i - 1]);
-            System.out.println("sb0=" + sb);
-            while(locate <= s.length()){
-                int locate1 = locate + 2 * (numRows - (i - 1) - 1);
-                if(locate1 > s.length()){
+            sb.append(arr1[i]);
+            while(locate < length){
+                int locate1 = locate + 2 * (numRows - i - 1);
+                if(locate1 >= length){
                     break;
                 }
-                if(locate!=locate1){
-                    System.out.println("locate1=" + locate1);
-                    sb.append(arr1[locate1 - 1]);
-                    System.out.println("sb1=" + sb);
+                if(locate != locate1){
+                    sb.append(arr1[locate1]);
                     locate = locate1;// 位置1
                 }
-
-
-                locate += 2 * (i - 1);// 位置2
-                if(locate > s.length()){
+                locate += 2 * i;// 位置2
+                if(locate >= length){
                     break;
                 }
                 if(locate1 == locate){
                     continue;
                 }
-                System.out.println("locate2=" + locate);
-                sb.append(arr1[locate - 1]);
-                System.out.println("sb2=" + sb);
+                sb.append(arr1[locate]);
             }
         }
         return sb.toString();
