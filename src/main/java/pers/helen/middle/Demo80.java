@@ -1,8 +1,5 @@
 package pers.helen.middle;
 
-import java.time.Year;
-import java.util.Arrays;
-
 /**
  * 80.删除有序数组中的重复项 II
  * 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
@@ -41,12 +38,71 @@ public class Demo80 {
         //                int[] nums = new int[]{0, 1, 1, 1, 2, 2, 3, 4, 4};
         //                                                        int[] nums = new int[]{1, 1, 1, 2, 2, 3};
         int[] nums = new int[]{1, 1, 1, 2, 2, 2, 3, 3};
+        // 1, 1, 2, 2, 2, 2, 3, 3
+        // 1, 1, 2, 2, 3, 3, 3, 3
+        // 6
         //        int[] nums = new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3};
-        int len = removeDuplicates(nums);
+        int len = removeDuplicates1(nums);
         for(int i = 0; i < len; i++){
             System.out.print(nums[i] + ", ");
         }
         System.out.println();
+    }
+
+    public static int removeDuplicates1(int[] nums){
+        int replace = 0;
+        for(int i = 0; i < nums.length; i++){
+            int current = nums[i];
+            int j = i;
+            int count = 0;
+
+            // 统计当前元素总个数
+            while(j < nums.length && nums[j] == current){
+                j++;
+                count++;
+            }
+            // 记录下一元素的值
+            int nextVal;
+            if(j < nums.length){
+                nextVal = nums[j];
+            }else{
+                System.out.println("到末尾了");
+                return 0;
+            }
+            if(j + 1 < nums.length){
+                nextVal = nums[j + 1];
+            }
+
+            // 当前元素本身的个数
+            int only = count - replace;
+            int replaceIndex = j + 1;
+            if(only > 2){
+                // 本身个数超过两个，那就要替换超出两个部分
+                replaceIndex = i + 2;
+            }else{
+                //本身并没超出两个，可能是1个，可能是2个
+                if(replace > 0){
+                    // 如果存在替换前一元素的，那就要替换超出部分
+                    replaceIndex = i + only;
+                }
+            }
+            replace = 0;
+            if(replaceIndex < nums.length){
+                // 还未越界
+                while(nums[replaceIndex] != nextVal){
+                    nums[replaceIndex] = nextVal;
+                    replaceIndex++;
+                    replace++;
+                }
+            }else{
+                // 越界了
+
+            }
+            if(j >= nums.length){
+                return 0;
+            }
+        }
+        return 0;
     }
 
     /**
