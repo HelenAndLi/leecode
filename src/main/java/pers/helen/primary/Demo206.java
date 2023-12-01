@@ -1,9 +1,6 @@
 package pers.helen.primary;
 
 
-import java.util.HashMap;
-import java.util.List;
-
 /**
  *
  * 206.反转链表（https://leetcode.cn/problems/reverse-linked-list/）

@@ -2,16 +2,34 @@ package pers.helen.middle;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 15.三数之和（https://leetcode.cn/problems/3sum/）
+ * <p>
+ * 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k]
+ * == 0 。请
+ * <p>
+ * 你返回所有和为 0 且不重复的三元组。
+ * <p>
+ * 注意：答案中不可以包含重复的三元组。
+ * <p>
+ * 输入：nums = [-1,0,1,2,-1,-4]
+ * 输出：[[-1,-1,2],[-1,0,1]]
+ * 解释：
+ * nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。
+ * nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。
+ * nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
+ * 不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。
+ * 注意，输出的顺序和三元组的顺序并不重要。
  */
 public class Demo15 {
 
     public static void main(String[] args){
-        //        int[] nums = {-1, 0, 1, 2, -1, -4};
-        int[] nums = {};
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+        //        int[] nums = {};
         System.out.println(threeSum(nums));
     }
 
@@ -20,26 +38,36 @@ public class Demo15 {
         if(nums.length < 2){
             return result;
         }
+        Map<Integer,Boolean> notFound = new HashMap<>();
         for(int i = 0; i < nums.length - 2; i++){
             for(int j = i + 1; j < nums.length - 1; j++){
                 if(i == j){
                     continue;
                 }
+                int ni = nums[i];
+                int nj = nums[j];
+                int iAndJ = ni + nj;
+                if(notFound.containsKey(iAndJ)){
+                    continue;
+                }
+                boolean found = false;
                 for(int k = j + 1; k < nums.length; k++){
-                    if(j == k || i == k){
-                        continue;
-                    }
-                    if(nums[i] + nums[j] + nums[k] == 0){
+                    int kk = nums[k];
+                    if(iAndJ + kk == 0){
                         List<Integer> list = new ArrayList<>();
-                        list.add(nums[i]);
-                        list.add(nums[j]);
-                        list.add(nums[k]);
+                        list.add(ni);
+                        list.add(nj);
+                        list.add(kk);
                         Collections.sort(list);
                         if(!result.contains(list)){
                             result.add(list);
                         }
-
+                        found = true;
+                        break;
                     }
+                }
+                if(!found){
+                    notFound.put(iAndJ,true);
                 }
             }
         }

@@ -22,44 +22,63 @@ public class Middle36 {
 
     public static void main(String[] args){
         char[][] board = new char[][]
-                {{
-                        '5', '3', '.', '.', '7', '.', '.', '.', '.'
-                }
-                        , {
-                        '6', '.', '.', '1', '9', '5', '.', '.', '.'
-                }
-                        , {
-                        '.', '9', '8', '.', '.', '.', '.', '6', '.'
-                }
-                        , {
-                        '8', '.', '.', '.', '6', '.', '.', '.', '3'
-                }
-                        , {
-                        '4', '.', '.', '8', '.', '3', '.', '.', '1'
-                }
-                        , {
-                        '7', '.', '.', '.', '2', '.', '.', '.', '6'
-                }
-                        , {
-                        '.', '6', '.', '.', '.', '.', '2', '8', '.'
-                }
-                        , {
-                        '.', '.', '.', '4', '1', '9', '.', '.', '5'
-                }
-                        , {
-                        '.', '.', '.', '.', '8', '.', '.', '7', '9'
-                }};
+                {{'.', '.', '.', '.', '5', '.', '.', '1', '.'},
+                 {'.', '4', '.', '3', '.', '.', '.', '.', '.'},
+                 {'.', '.', '.', '.', '.', '3', '.', '.', '1'},
+                 {'8', '.', '.', '.', '.', '.', '.', '2', '.'},
+                 {'.', '.', '2', '.', '7', '.', '.', '.', '.'},
+                 {'.', '1', '5', '.', '.', '.', '.', '.', '.'},
+                 {'.', '.', '.', '.', '.', '2', '.', '.', '.'},
+                 {'.', '2', '.', '9', '.', '.', '.', '.', '.'},
+                 {'.', '.', '4', '.', '.', '.', '.', '.', '.'}};
+        //                {{
+        //                        '5', '3', '.', '.', '7', '.', '.', '.', '.'
+        //                }
+        //                        , {
+        //                        '6', '.', '.', '1', '9', '5', '.', '.', '.'
+        //                }
+        //                        , {
+        //                        '.', '9', '8', '.', '.', '.', '.', '6', '.'
+        //                }
+        //                        , {
+        //                        '8', '.', '.', '.', '6', '.', '.', '.', '3'
+        //                }
+        //                        , {
+        //                        '4', '.', '.', '8', '.', '3', '.', '.', '1'
+        //                }
+        //                        , {
+        //                        '7', '.', '.', '.', '2', '.', '.', '.', '6'
+        //                }
+        //                        , {
+        //                        '.', '6', '.', '.', '.', '.', '2', '8', '.'
+        //                }
+        //                        , {
+        //                        '.', '.', '.', '4', '1', '9', '.', '.', '5'
+        //                }
+        //                        , {
+        //                        '.', '.', '.', '.', '8', '.', '.', '7', '9'
+        //                }};
+        System.out.println(isValidSudoku(board));
+        System.out.println(0/3);
+        System.out.println(1/3);
+        System.out.println(2/3);
+        System.out.println(3/3);
+        System.out.println(4/3);
+        System.out.println(5/3);
+        System.out.println(6/3);
+        System.out.println(7/3);
+        System.out.println(8/3);
     }
 
     public static boolean isValidSudoku(char[][] board){
         for(int i = 0; i < board.length; i++){
             List<Integer> list = new ArrayList<>();
-            for(int j = 0; i < board[i].length; j++){
+            for(int j = 0; j < board[i].length; j++){
                 if(board[i][j] == '.'){
                     continue;
                 }
                 int current = board[i][j];
-                if(list.contains(list)){
+                if(list.contains(current)){
                     return false;
                 }
                 list.add(current);
@@ -67,12 +86,12 @@ public class Middle36 {
         }
         for(int i = 0; i < board.length; i++){
             List<Integer> list = new ArrayList<>();
-            for(int j = 0; i < board[i].length; j++){
+            for(int j = 0; j < board[i].length; j++){
                 if(board[j][i] == '.'){
                     continue;
                 }
                 int current = board[j][i];
-                if(list.contains(list)){
+                if(list.contains(current)){
                     return false;
                 }
                 list.add(current);

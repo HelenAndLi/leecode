@@ -17,6 +17,19 @@ public class Middle49 {
 //        String[] str = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
         String[] str = new String[]{"a"};
         System.out.println(groupAnagrams(str));
+        System.out.println(2358/10);
+        System.out.println(2358/100);
+        System.out.println(2358/1000);
+        System.out.println(2358/10000);
+        System.out.println("=====");
+        System.out.println(7%Math.pow(10, 1));
+        System.out.println((7%Math.pow(10, 1)-7%Math.pow(10, 0)));
+        System.out.println(19%Math.pow(10, 1));
+        System.out.println(198%Math.pow(10, 2));
+        System.out.println((398%Math.pow(10, 3) -398%Math.pow(10, 2))/Math.pow(10,2));
+//        System.out.println(2358%1000);
+//        System.out.println(2358%10000);
+//        System.out.println(2358%100000);
     }
 
     public static List<List<String>> groupAnagrams(String[] strs){
