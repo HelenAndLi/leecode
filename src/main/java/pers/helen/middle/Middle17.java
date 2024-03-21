@@ -21,7 +21,7 @@ import java.util.List;
  * 输入：digits = "2"
  * 输出：["a","b","c"]
  */
-public class Demo17 {
+public class Middle17 {
 
     public static void main(String[] args){
         System.out.println(letterCombinations("233"));
